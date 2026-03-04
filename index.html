@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Israr Ahmed | Portfolio</title>
+    <meta name="description" content="Portfolio of Israr Studio - Forensic Scientist turned Digital Designer.">
+    <meta property="og:title" content="Israr Studio | Nothing Is Imperfect">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Oswald:wght@300;500;700&family=Pinyon+Script&display=swap"
+        rel="stylesheet">
+
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        /* --- 1. CORE VARIABLES --- */
+        :root {
+            --brand-red: #e63946;
+            --brand-navy: #1d3557;
+            --status-green: #00C853;
+            --bg-body: #F0EEE9;
+            --bg-card: #FFFFFF;
+            --text-main: #1d3557;
+            --input-bg: #f3f3f3;
+
+            --font-head: 'Oswald', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-script: 'Pinyon Script', cursive;
+
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --shadow-subtle: 0 10px 40px -10px rgba(29, 53, 87, 0.05);
+            --container-padding: 5%;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            scroll-padding-top: 120px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            padding: 0 var(--container-padding);
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        /* --- 2. LUXURY PRELOADER (Logo) --- */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #F0EEE9;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .preloader-svg {
+            width: 140px;
+            height: auto;
+            fill: var(--brand-navy);
+            overflow: visible;
+        }
+
+        .logo-part {
+            opacity: 0;
+        }
+
+        /* --- 3. TEXTURE --- */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.04;
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAGFBMVEUAAAA5OTkAAABMTExERERmZmYzMzMyMjJ4D30DAAAAB3RSTlMAn5+fn5+fAVY92wAAABhJREFUOMtjYBjWgBEczGiA1TCgKAM4AwA6WACF+NE2BAAAAABJRU5ErkJggg==');
+            mix-blend-mode: multiply;
+        }
+
+        /* --- 4. ARCHITECTURAL NAVBAR --- */
+        .nav-wrapper {
+            position: fixed;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            z-index: 1000;
+            padding: 0 5%;
+        }
+
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 12px 30px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scroll-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: var(--brand-red);
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        .logo-container {
+            height: 32px;
+            width: auto;
+            justify-self: start;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo-svg {
+            height: 100%;
+            width: auto;
+            fill: var(--brand-navy);
+            display: block;
+        }
+
+        .nav-center-status {
+            justify-self: center;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            color: var(--status-green);
+            white-space: nowrap;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--status-green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.4;
+                transform: scale(1.1);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            justify-self: end;
+        }
+
+        .nav-links-group {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .nav-link {
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-main);
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s;
+            opacity: 0.6;
+        }
+
+        .nav-link:hover {
+            color: var(--brand-red);
+            opacity: 1;
+        }
+
+        .nav-link.active {
+            color: var(--brand-red);
+            opacity: 1;
+            font-weight: 700;
+        }
+
+        .resume-link {
+            opacity: 1;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            white-space: nowrap;
+        }
+
+        .resume-link i {
+            font-size: 1.1em;
+            color: var(--brand-red);
+            transition: transform 0.3s;
+        }
+
+        .resume-link:hover i {
+            transform: translate(2px, -2px);
+        }
+
+        /* --- 5. HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 6rem;
+            position: relative;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+            width: 100%;
+            align-items: end;
+        }
+
+        .hero-headline {
+            grid-column: 1 / 10;
+            font-family: var(--font-head);
+            font-size: clamp(3.5rem, 11vw, 10rem);
+            line-height: 0.9;
+            text-transform: uppercase;
+            color: var(--brand-navy);
+            letter-spacing: -0.02em;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .hero-sub {
+            grid-column: 10 / 13;
+            padding-bottom: 1rem;
+            border-top: 4px solid var(--brand-red);
+            padding-top: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .hero-sub p {
+            font-size: 1.15rem;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        /* --- 6. MARQUEE --- */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 2.5rem 0;
+            background: var(--brand-navy);
+            color: #fff;
+            width: 100%;
+            margin: 0;
+            opacity: 0;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: scroll 30s linear infinite;
+        }
+
+        .marquee-content span {
+            font-family: var(--font-head);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            text-transform: uppercase;
+            margin-right: 5rem;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+            color: transparent;
+        }
+
+        .marquee-content span.highlight {
+            color: #fff;
+            -webkit-text-stroke: 0;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* --- 7. IDENTITY (BENTO GRID) --- */
+        .bento-section {
+            padding: 8rem var(--container-padding);
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+        }
+
+        .section-label {
+            font-family: var(--font-head);
+            color: var(--brand-navy);
+            opacity: 0.6;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: var(--font-head);
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            text-transform: uppercase;
+            line-height: 1;
+            color: var(--brand-navy);
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, minmax(250px, auto));
+            gap: 1.5rem;
+        }
+
+        .bento-box {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid rgba(29, 53, 87, 0.05);
+            box-shadow: var(--shadow-subtle);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(29, 53, 87, 0.1);
+            border-color: rgba(29, 53, 87, 0.2);
+        }
+
+        .box-bio {
+            grid-column: 1 / 3;
+            grid-row: 1 / 3;
+            justify-content: start;
+            gap: 2rem;
+        }
+
+        .box-stack {
+            grid-column: 3 / 4;
+            grid-row: 1 / 2;
+            justify-content: flex-start;
+            gap: 1.5rem;
+        }
+
+        /* MUSIC VIBE (Clean Single Track) */
+        .box-vibe {
+            grid-column: 4 / 5;
+            grid-row: 1 / 2;
+            background: #1DB954;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .vibe-content {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .music-bars {
+            display: flex;
+            gap: 4px;
+            height: 20px;
+            align-items: flex-end;
+        }
+
+        .bar {
+            width: 4px;
+            background: #fff;
+            height: 4px;
+            transition: all 0.3s;
+        }
+
+        .box-vibe.playing .bar {
+            animation: equalizer 1s infinite ease-in-out;
+        }
+
+        .box-vibe.playing .bar:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .box-vibe.playing .bar:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes equalizer {
+
+            0%,
+            100% {
+                height: 5px;
+            }
+
+            50% {
+                height: 25px;
+            }
+        }
+
+        #play-icon {
+            transition: transform 0.2s;
+        }
+
+        .box-vibe:hover #play-icon {
+            transform: scale(1.1);
+        }
+
+        .box-time {
+            grid-column: 3 / 4;
+            grid-row: 2 / 3;
+            background: #111;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .box-social {
+            grid-column: 4 / 5;
+            grid-row: 2 / 3;
+            background: var(--brand-navy);
+            color: #fff;
+            border: none;
+        }
+
+        .bio-text {
+            font-size: 1.25rem;
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .bio-text strong {
+            color: var(--brand-red);
+            font-weight: 700;
+        }
+
+        .stack-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .stack-pill {
+            padding: 6px 14px;
+            border: 1px solid #ddd;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .time-display {
+            font-family: var(--font-head);
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: 1px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .time-label {
+            font-size: 0.8rem;
+            opacity: 0.6;
+            text-transform: uppercase;
+            margin-top: 1.5rem;
+            display: block;
+            letter-spacing: 1px;
+        }
+
+        .social-links-bento {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            height: 100%;
+            justify-content: center;
+        }
+
+        .social-link {
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            display: flex;
+            justify-content: space-between;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .social-link:hover {
+            opacity: 1;
+        }
+
+        /* --- 8. SELECTED WORKS --- */
+        .work-section {
+            padding: 4rem var(--container-padding);
+        }
+
+        .project-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8rem;
+        }
+
+        .project-list:hover .project-card {
+            opacity: 0.4;
+            filter: grayscale(100%);
+            transition: all 0.4s ease;
+        }
+
+        .project-list .project-card:hover {
+            opacity: 1;
+            filter: grayscale(0%);
+            transform: scale(1.02);
+        }
+
+        .project-card {
+            display: flex;
+            background-color: var(--bg-card);
+            min-height: 600px;
+            border: 1px solid rgba(29, 53, 87, 0.08);
+            box-shadow: var(--shadow-subtle);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .p-content,
+        .p-image {
+            width: 50%;
+        }
+
+        .p-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .img-parallax-container {
+            width: 100%;
+            height: 125%;
+            position: absolute;
+            top: -12.5%;
+            left: 0;
+        }
+
+        .img-parallax-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: filter 0.5s ease;
+        }
+
+        .project-card:hover .img-parallax-container img {
+            filter: grayscale(0%);
+        }
+
+        .p-content {
+            padding: 5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .p-number {
+            font-family: var(--font-head);
+            font-size: 12rem;
+            font-weight: 700;
+            color: transparent;
+            -webkit-text-stroke: 2px rgba(29, 53, 87, 0.05);
+            line-height: 1;
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .p-title {
+            font-family: var(--font-head);
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            text-transform: uppercase;
+            line-height: 0.95;
+            margin-bottom: 1.5rem;
+            color: var(--brand-navy);
+            z-index: 1;
+        }
+
+        .p-desc {
+            color: #555;
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            max-width: 90%;
+            z-index: 1;
+            line-height: 1.6;
+        }
+
+        .tags {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+            z-index: 1;
+        }
+
+        .tag {
+            font-family: var(--font-head);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: var(--brand-navy);
+            border-bottom: 2px solid rgba(29, 53, 87, 0.2);
+            padding-bottom: 2px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            z-index: 1;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            font-family: var(--font-head);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-block;
+            transition: all 0.2s ease;
+        }
+
+        .btn:active {
+            transform: scale(0.95) !important;
+        }
+
+        .btn-solid {
+            background: var(--brand-red);
+            color: #fff;
+            border: 1px solid var(--brand-red);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--brand-navy);
+            border: 1px solid var(--brand-navy);
+        }
+
+        .project-card:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        /* HOVER EFFECTS DESKTOP */
+        @media (hover: hover) {
+            .bento-box:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 30px rgba(29, 53, 87, 0.1);
+                border-color: rgba(29, 53, 87, 0.2);
+            }
+
+            .project-list:hover .project-card {
+                opacity: 0.4;
+                filter: grayscale(100%);
+                transition: all 0.4s ease;
+            }
+
+            .project-list .project-card:hover {
+                opacity: 1;
+                filter: grayscale(0%);
+                transform: scale(1.02);
+            }
+
+            .project-card:hover .img-parallax-container img {
+                filter: grayscale(0%);
+            }
+
+            .btn-solid:hover {
+                background: var(--brand-navy);
+                border-color: var(--brand-navy);
+                transform: translateY(-3px);
+            }
+
+            .btn-outline:hover {
+                background: var(--brand-navy);
+                color: #fff;
+                transform: translateY(-3px);
+            }
+        }
+
+        /* --- 9. PIPELINE & MAGIC CARD --- */
+
+        .pipeline-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .pipeline-card {
+            background: #fff;
+            border: 2px dashed rgba(29, 53, 87, 0.15);
+            padding: 3.5rem;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(30px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pipeline-card:active {
+            transform: scale(0.98);
+            border-color: var(--brand-red);
+        }
+
+        @media (hover: hover) {
+            .pipeline-card:hover {
+                border-color: var(--brand-red);
+                box-shadow: var(--shadow-subtle);
+            }
+
+            .pipeline-card:hover .card-video-bg {
+                opacity: 1;
+            }
+
+            .magic-copy-card:hover {
+                background: var(--brand-red);
+                border-color: var(--brand-red);
+                transform: translateY(-5px);
+                box-shadow: 0 20px 50px rgba(230, 57, 70, 0.3);
+            }
+        }
+
+        .card-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: 0;
+        }
+
+        .pipeline-content {
+            z-index: 1;
+            position: relative;
+        }
+
+        .magic-copy-card {
+            background: var(--brand-navy);
+            color: #fff;
+            border: 2px solid var(--brand-navy);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .magic-copy-card:active {
+            transform: scale(0.98);
+        }
+
+        .magic-label {
+            font-family: var(--font-head);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            opacity: 0.7;
+        }
+
+        .email-display {
+            font-family: var(--font-head);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-top: 1rem;
+            word-break: break-all;
+        }
+
+        .copy-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* --- 10. FOOTER (FLUSH) --- */
+        .contact-footer {
+            padding: 8rem var(--container-padding) 4rem;
+            background: var(--brand-navy);
+            color: #fff;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .footer-main-text {
+            font-family: var(--font-head);
+            font-weight: 700;
+            font-size: 10.5vw;
+            text-transform: uppercase;
+            line-height: 0.8;
+            color: #fff;
+            white-space: nowrap;
+            letter-spacing: -0.02em;
+        }
+
+        .footer-sub-text {
+            font-family: var(--font-head);
+            font-weight: 300;
+            font-size: 4.25vw;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 0.5vw;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        .script-highlight {
+            font-family: var(--font-script);
+            color: var(--brand-red);
+            font-weight: 400;
+            text-transform: none;
+            font-size: 1.4em;
+            margin: 0 0.1em;
+        }
+
+        .mobile-break {
+            display: none;
+        }
+
+        /* --- 11. DESKTOP WARNING TOAST --- */
+        .toast-container {
+            position: fixed;
+            bottom: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 400px;
+            background: #fff;
+            border: 1px solid rgba(29, 53, 87, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            z-index: 9999;
+            transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .toast-container.active {
+            bottom: 30px;
+        }
+
+        .toast-btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 6px;
+            font-family: var(--font-head);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            cursor: pointer;
+            text-align: center;
+            border: none;
+        }
+
+        .btn-cancel {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-go {
+            background: var(--brand-navy);
+            color: #fff;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        /* --- RESPONSIVE OPTIMIZATIONS --- */
+
+        /* TABLET (1024px) */
+        @media (max-width: 1024px) {
+            nav {
+                padding: 10px 20px;
+                grid-template-columns: auto 1fr auto;
+            }
+
+            .nav-mid,
+            .nav-links-group {
+                display: none;
+            }
+
+            .nav-right {
+                gap: 1rem;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-headline {
+                grid-column: 1 / -1;
+            }
+
+            .hero-sub {
+                grid-column: 1 / -1;
+                border-top: 4px solid var(--brand-red);
+                padding-top: 1rem;
+                margin-top: 1rem;
+            }
+
+            .pipeline-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bento-grid {
+                grid-template-columns: 1fr 1fr;
+                grid-auto-rows: auto;
+            }
+
+            .bento-box {
+                grid-column: auto;
+                grid-row: auto;
+            }
+
+            .box-bio {
+                grid-column: 1 / -1;
+                order: 1;
+            }
+
+            .box-stack {
+                grid-column: 1 / -1;
+                order: 2;
+                justify-content: start;
+                gap: 1.5rem;
+            }
+
+            .box-vibe {
+                grid-column: 1 / 2;
+                order: 3;
+            }
+
+            .box-time {
+                grid-column: 2 / 3;
+                order: 4;
+            }
+
+            .box-social {
+                grid-column: 1 / -1;
+                order: 5;
+            }
+
+            /* TABLET BTN STACK (Elongated) */
+            .btn-group {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* MOBILE (600px) */
+        @media (max-width: 600px) {
+            .container {
+                padding: 0 5%;
+            }
+
+            .bento-section,
+            .work-section,
+            .contact-footer {
+                padding: 4rem 5%;
+            }
+
+            nav {
+                padding: 10px 15px;
+                grid-template-columns: 1fr auto;
+            }
+
+            .nav-right {
+                gap: 1rem;
+            }
+
+            .hero {
+                display: block;
+                padding-top: 7rem;
+                min-height: auto;
+            }
+
+            .hero-headline {
+                font-size: 3.5rem;
+                line-height: 1;
+            }
+
+            .bento-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+
+            .bento-box {
+                padding: 1.25rem;
+            }
+
+            .box-stack {
+                grid-column: 1 / -1;
+                justify-content: start;
+                gap: 1rem;
+            }
+
+            .box-bio,
+            .box-social {
+                grid-column: 1 / -1;
+            }
+
+            .box-vibe {
+                grid-column: 1 / 2;
+            }
+
+            .box-time {
+                grid-column: 2 / 3;
+            }
+
+            .time-display {
+                font-size: 1.5rem;
+            }
+
+            .time-label {
+                margin-top: 1rem;
+            }
+
+            .music-bars {
+                height: 15px;
+            }
+
+            .project-card,
+            .project-card:nth-child(even) {
+                flex-direction: column;
+            }
+
+            .p-content,
+            .p-image {
+                width: 100%;
+            }
+
+            .p-image {
+                height: 220px;
+            }
+
+            .p-content {
+                padding: 1.5rem;
+            }
+
+            .p-number {
+                font-size: 4rem;
+                top: 1rem;
+                left: 1rem;
+                opacity: 0.1;
+            }
+
+            .p-title {
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+            }
+
+            /* MOBILE BTN ROW (Side by Side) */
+            .btn-group {
+                display: flex;
+                width: 100%;
+                gap: 10px;
+                flex-direction: row;
+            }
+
+            .btn {
+                flex: 1;
+                text-align: center;
+                padding: 10px 0;
+                font-size: 0.8rem;
+            }
+
+            .project-list:hover .project-card {
+                opacity: 1;
+                filter: none;
+            }
+
+            .project-list .project-card:hover {
+                transform: none;
+            }
+
+            /* FOOTER MOBILE FIX */
+            .footer-main-text {
+                font-size: 3rem;
+                white-space: normal;
+                line-height: 1.1;
+            }
+
+            .footer-sub-text {
+                font-size: 1.2rem;
+                white-space: normal;
+                margin-top: 0.8rem;
+                letter-spacing: 1px;
+                line-height: 1.2;
+            }
+
+            .mobile-break {
+                display: block;
+                margin-bottom: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="preloader">
+        <svg class="preloader-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 172.57 70.19">
+            <g id="Layer_2_Load">
+                <g id="Layer_1-2_Load">
+                    <path class="logo-part"
+                        d="M38.79,42.37H50.37a1.17,1.17,0,0,0,1-1.83L39.71,23.37a1.17,1.17,0,0,1,1-1.83H62.89v6.13H52.57a1.17,1.17,0,0,0-1,1.83L63.36,46.66a1.17,1.17,0,0,1-1,1.84H38.79Z" />
+                    <path class="logo-part"
+                        d="M77.05,22.83a1.26,1.26,0,0,0,2.26.8,7.69,7.69,0,0,1,1-1.05,8,8,0,0,1,5.48-1.95,17.79,17.79,0,0,1,2.44.27l.5.09-1,6.92A1.26,1.26,0,0,1,86.22,29l-.45-.1a9.45,9.45,0,0,0-1.88-.18q-3.57,0-5.14,1.83t-1.56,6.12V47.24a1.27,1.27,0,0,1-1.27,1.26h-5.3a1.27,1.27,0,0,1-1.27-1.26V22.8a1.26,1.26,0,0,1,1.27-1.26h5.16a1.27,1.27,0,0,1,1.27,1.29Z" />
+                    <path class="logo-part"
+                        d="M118.33,48.5H112.7a1,1,0,0,1-1-1h0a1,1,0,0,0-1.63-.71A9,9,0,0,1,108,48.37a11.4,11.4,0,0,1-5.45,1.2,10.65,10.65,0,0,1-8.65-4q-3.28-4-3.28-10.52,0-6.83,3.23-10.62a11.12,11.12,0,0,1,9-3.81A10.07,10.07,0,0,1,108.06,22a9.34,9.34,0,0,1,2.15,1.74,1,1,0,0,0,1.66-.66V22.5a1,1,0,0,1,1-1h5.5a1,1,0,0,1,1,1v25A1,1,0,0,1,118.33,48.5ZM112.15,35a8.5,8.5,0,0,0-1.83-5.75,6.19,6.19,0,0,0-4.94-2.11,6.3,6.3,0,0,0-5,2.1A8.47,8.47,0,0,0,98.54,35a8.32,8.32,0,0,0,1.8,5.69,7.2,7.2,0,0,0,10,0A8.36,8.36,0,0,0,112.15,35Z" />
+                    <path class="logo-part"
+                        d="M134.35,22.83a1.26,1.26,0,0,0,2.26.8,8.34,8.34,0,0,1,1-1.05,8,8,0,0,1,5.48-1.95,17.89,17.89,0,0,1,2.45.27L146,21l-1,6.92A1.25,1.25,0,0,1,143.52,29l-.44-.1a9.52,9.52,0,0,0-1.88-.18q-3.58,0-5.14,1.83t-1.57,6.12V47.24a1.27,1.27,0,0,1-1.26,1.26h-5.31a1.26,1.26,0,0,1-1.26-1.26V22.8a1.25,1.25,0,0,1,1.26-1.26h5.17a1.26,1.26,0,0,1,1.26,1.29Z" />
+                    <rect class="logo-part" x="26.53" y="21.54" width="7.81" height="26.96" rx="1.59" />
+                    <path class="logo-part" d="M0,0V70.19H172.57V0ZM168.55,66.13H4V3.86H168.55Z" />
+                </g>
+            </g>
+        </svg>
+    </div>
+
+    <div class="noise-overlay"></div>
+
+    <div class="nav-wrapper">
+        <nav>
+            <a href="#hero" class="logo-container">
+                <svg class="nav-logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 172.57 70.19">
+                    <g id="Layer_2">
+                        <g id="Layer_1-2">
+                            <path class="cls-1"
+                                d="M38.79,42.37H50.37a1.17,1.17,0,0,0,1-1.83L39.71,23.37a1.17,1.17,0,0,1,1-1.83H62.89v6.13H52.57a1.17,1.17,0,0,0-1,1.83L63.36,46.66a1.17,1.17,0,0,1-1,1.84H38.79Z" />
+                            <path class="cls-1"
+                                d="M77.05,22.83a1.26,1.26,0,0,0,2.26.8,7.69,7.69,0,0,1,1-1.05,8,8,0,0,1,5.48-1.95,17.79,17.79,0,0,1,2.44.27l.5.09-1,6.92A1.26,1.26,0,0,1,86.22,29l-.45-.1a9.45,9.45,0,0,0-1.88-.18q-3.57,0-5.14,1.83t-1.56,6.12V47.24a1.27,1.27,0,0,1-1.27,1.26h-5.3a1.27,1.27,0,0,1-1.27-1.26V22.8a1.26,1.26,0,0,1,1.27-1.26h5.16a1.27,1.27,0,0,1,1.27,1.29Z" />
+                            <path class="cls-1"
+                                d="M118.33,48.5H112.7a1,1,0,0,1-1-1h0a1,1,0,0,0-1.63-.71A9,9,0,0,1,108,48.37a11.4,11.4,0,0,1-5.45,1.2,10.65,10.65,0,0,1-8.65-4q-3.28-4-3.28-10.52,0-6.83,3.23-10.62a11.12,11.12,0,0,1,9-3.81A10.07,10.07,0,0,1,108.06,22a9.34,9.34,0,0,1,2.15,1.74,1,1,0,0,0,1.66-.66V22.5a1,1,0,0,1,1-1h5.5a1,1,0,0,1,1,1v25A1,1,0,0,1,118.33,48.5ZM112.15,35a8.5,8.5,0,0,0-1.83-5.75,6.19,6.19,0,0,0-4.94-2.11,6.3,6.3,0,0,0-5,2.1A8.47,8.47,0,0,0,98.54,35a8.32,8.32,0,0,0,1.8,5.69,7.2,7.2,0,0,0,10,0A8.36,8.36,0,0,0,112.15,35Z" />
+                            <path class="cls-1"
+                                d="M134.35,22.83a1.26,1.26,0,0,0,2.26.8,8.34,8.34,0,0,1,1-1.05,8,8,0,0,1,5.48-1.95,17.89,17.89,0,0,1,2.45.27L146,21l-1,6.92A1.25,1.25,0,0,1,143.52,29l-.44-.1a9.52,9.52,0,0,0-1.88-.18q-3.58,0-5.14,1.83t-1.57,6.12V47.24a1.27,1.27,0,0,1-1.26,1.26h-5.31a1.26,1.26,0,0,1-1.26-1.26V22.8a1.25,1.25,0,0,1,1.26-1.26h5.17a1.26,1.26,0,0,1,1.26,1.29Z" />
+                            <rect class="cls-1" x="26.53" y="21.54" width="7.81" height="26.96" rx="1.59" />
+                            <path class="cls-1" d="M0,0V70.19H172.57V0ZM168.55,66.13H4V3.86H168.55Z" />
+                        </g>
+                    </g>
+                </svg>
+            </a>
+
+            <div class="nav-mid nav-center-status">
+                <div class="status-dot"></div> Available
+            </div>
+
+            <div class="nav-right">
+                <div class="nav-links-group">
+                    <a href="#identity" class="nav-link">About</a>
+                    <a href="#work" class="nav-link">Work</a>
+                    <a href="#pipeline" class="nav-link">Pipeline</a>
+                </div>
+                <a href="Assets/Israr_Ahmed_Resume.pdf" target="_blank" class="nav-link resume-link">Resume <i
+                        class="ph ph-arrow-up-right"></i></a>
+            </div>
+
+            <div class="scroll-progress"></div>
+        </nav>
+    </div>
+
+    <section id="hero" class="container hero">
+        <div class="hero-grid">
+            <h1 class="hero-headline">Nothing<br><span style="color:var(--brand-red)">Is</span><br>Imperfect<span
+                    style="color:var(--brand-red)">.</span></h1>
+            <div class="hero-sub">
+                <p>Every authentic story has its own logic. <strong>"Nothing is imperfect—only unframed."</strong> My job is to decode the pattern in your chaos and
+                turn it into a clear, honest brand.<br><br><strong>"If you’ve a brand, you’re raising a child."</strong> It needs an identity, boundaries, and nurture. 
+                I help <strong>"brand parents"</strong> give their brands a face, a voice, and a spine people can trust.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="marquee-container">
+        <div class="marquee-content">
+            <span>Storytelling</span> <span class="highlight">Branding</span>
+            <span>Strategy</span> <span class="highlight">Design</span>
+            <span>Storytelling</span> <span class="highlight">Branding</span>
+            <span>Strategy</span> <span class="highlight">Design</span>
+        </div>
+    </div>
+
+    <section id="identity" class="bento-section container">
+        <div class="section-header">
+            <span class="section-label">Identity</span>
+            <h2 class="section-title">Symbiotic Association.</h2>
+        </div>
+        <div class="bento-grid">
+            <div class="bento-box box-bio">
+                <h3 style="font-family: var(--font-head); text-transform: uppercase; color: #999;">About Me</h3>
+                <p class="bio-text">
+                    A <strong>symbiotic associate</strong> because I operate where most people stall. Ambiguity, unfinished stories, noisy visions—that isn’t
+                    background interference, it’s my working material. I reverse‑engineer that chaos, isolate the signal in the noise, and
+                    return it as something usable: a defined identity, a point of view, and a system your brand can actually run on.
+                    <br><br>
+                    <strong>Forensics</strong> trained me to reconstruct from fragments; <strong>Cybersecurity</strong> taught me to trace invisibles from
+                    microscopic footprints. <strong>Brand strategy and design</strong> are simply the next layer of the same discipline—interrogating
+                    evidence, mapping behavior, and turning it into narratives and interfaces that feel precise, human, and trustworthy.
+                    <br><br> Beneath all of this sits one operating question: <strong>what makes a human choose one thing over another?</strong> Every audit,
+                    decision, and design move is just a different way of answering that for your brand.
+                </p>
+            </div>
+
+            <div class="bento-box box-stack">
+                <h3 style="font-family: var(--font-head); text-transform: uppercase; color: #999; margin-bottom: 1rem;">
+                    Toolbox</h3>
+                <div class="stack-list">
+                    <div class="stack-pill">Adobe Creative Suite</div>
+                    <div class="stack-pill">Figma/Framer</div>
+                    <div class="stack-pill">Capcut</div>
+                    <div class="stack-pill">AI Tools</div>
+                    <div class="stack-pill">Vibe Coding</div>
+                </div>
+            </div>
+
+            <div class="bento-box box-vibe" onclick="toggleMusic(this)">
+                <audio id="bg-music" loop>
+                    <source src="Assets/Ed Sheeran - Sapphire (Lyrics) ft. Arijit Singh.mp3" type="audio/mpeg">
+                </audio>
+
+                <div class="vibe-content">
+                    <i id="play-icon" class="ph ph-play-circle" style="font-size: 2.5rem;"></i>
+                    <div class="music-bars">
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                    </div>
+                    <div id="play-label"
+                        style="font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing:1px;">
+                        Play it. Enjoy it.
+                    </div>
+                </div>
+            </div>
+
+            <div class="bento-box box-time">
+                <div>
+                    <div id="live-clock" class="time-display">00:00:00</div>
+                    <div class="time-label">Jaipur, IN (GMT+5:30)</div>
+                </div>
+            </div>
+
+            <div class="bento-box box-social">
+                <div class="social-links-bento">
+                    <a href="https://www.behance.net/gallery/237101347/Portfolio-2025" class="social-link" target="_blank" rel="noopener noreferrer">Behance <span>&nearr;</span></a>
+                    <a href="https://www.linkedin.com/in/israr--ahmed/" class="social-link" target="_blank" rel="noopener noreferrer">LinkedIn <span>&nearr;</span></a>
+                    <a href="https://linktr.ee/israr._.ahmed" class="social-link" target="_blank" rel="noopener noreferrer">LinkTree <span>&nearr;</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="work" class="work-section container">
+        <span class="section-label">Selected Works</span>
+        <div class="project-list">
+
+            <article class="project-card">
+                <div class="p-image">
+                    <div class="img-parallax-container">
+                        <img src="Assets/vcr01.webp"
+                            alt="Veenu Project">
+                    </div>
+                </div>
+                <div class="p-content">
+                    <div class="p-number">01</div>
+                    <h3 class="p-title">VEENU</h3>
+                    <p class="p-desc"><strong>"Food that feels like home, even when you are miles away."</strong> VEENU is a cafe-restaurant identity built around warmth,
+                    familiarity, and small rituals—from the exterior signage to the napkin on the table with mathematical precision and functionality.</p>
+                    <div class="tags"><span class="tag">Rebranding</span><span class="tag">Brand Positioning</span><span
+                            class="tag">Identity Design</span></div>
+                    <div class="btn-group">
+                        <a href="https://israrrr.github.io/veenu-demo-website/" class="btn btn-solid desktop-only-link" target="_blank" rel="noopener noreferrer">Demo Website</a>
+                        <a href="https://israrrr.github.io/veenu-case-study/" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Case Study</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="p-image">
+                    <div class="img-parallax-container">
+                        <img src="Assets/BkGr.webp"
+                            alt="Bakkengrow Project">
+                    </div>
+                </div>
+                <div class="p-content">
+                    <div class="p-number">02</div>
+                    <h3 class="p-title">Bakkengrow</h3>
+                    <p class="p-desc">Bakkengrow is for breadwinners, not gamblers. An origami of money.
+                    A sober, strategic identity for an Indian asset manager that speaks to providers who treat investing as responsibility,
+                    not thrill-seeking. <br> Changed perspective with tagline: <br><strong>"Bakkengrow—Be A Breadwinner."</strong></p>
+                    <div class="tags"><span class="tag">Brand Strategy</span><span class="tag">Tagline</span><span
+                            class="tag">Visual Design</span></div>
+                    <div class="btn-group">
+                        <a href="https://israrrr.github.io/bakkengrow-demo-website/" class="btn btn-solid desktop-only-link" target="_blank" rel="noopener noreferrer">Demo Website</a>
+                        <a href="https://israrrr.github.io/bakkengrow-case-study/" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Case Study</a>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <section id="pipeline" class="container" style="padding-bottom: 6rem;">
+        <span class="section-label">Pipeline & Future</span>
+        <div class="pipeline-grid">
+
+            <div class="pipeline-card anim-reveal">
+                <video class="card-video-bg" autoplay loop muted playsinline poster="generated-image.png">
+                    <source src="Assets/NT-vid.webm" type="video/mp4">
+                </video>
+                <div class="pipeline-content">
+                    <div
+                        style="font-family:var(--font-head); color:var(--brand-red); font-weight:700; text-transform:uppercase; font-size:0.85rem;">
+                        BUILDING NOTTEES</div>
+                    <div
+                        style="font-family:var(--font-head); font-size:2.2rem; text-transform:uppercase; color:var(--brand-navy); margin:1rem 0; line-height:1;">
+                        Redesigning Environments, Not People.</div>
+                    <p style="color: #666;">A world where <strong>"We don't ask people to change, we redesign
+                            environments that embrace every mind."</strong></p>
+                </div>
+                <div class="pipeline-content"
+                    style="margin-top:2rem; font-weight:bold; font-size:0.8rem; text-transform:uppercase; opacity:0.6; color: #e63946;">
+                    Status: Concept Stage</div>
+            </div>
+
+            <div class="pipeline-card magic-copy-card anim-reveal" onclick="copyEmail()">
+                <div class="pipeline-content">
+                    <div class="magic-label">Start a Conversation</div>
+                    <h3 class="email-display" id="email-text">i.israrahmed08@gmail.com</h3>
+                </div>
+                <div class="copy-status">
+                    <i id="copy-icon" class="ph ph-copy"></i>
+                    <span id="copy-label">Click to Copy</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="contact-footer">
+        <div class="footer-content">
+            <span class="footer-main-text">For Brand Parents<span style="color:var(--brand-red)">.</span></span>
+            <span class="footer-sub-text">
+                If You've a <span class="script-highlight">Brand,</span><span class="mobile-break"></span> You're
+                Raising a <span class="script-highlight">Child.</span>
+            </span>
+        </div>
+        <div style="margin-top: 5rem; font-size: 0.8rem; opacity: 0.5;">&copy; 2025 Israr Ahmed . Autodidact
+        </div>
+    </footer>
+
+    <div id="desktop-toast" class="toast-container">
+        <div class="toast-content">
+            <div style="display:flex; gap:15px; align-items:center;">
+                <i class="ph ph-desktop" style="font-size: 1.5rem; color: var(--brand-red);"></i>
+                <div>
+                    <div style="font-family: var(--font-head); text-transform: uppercase; font-weight: 700;">Desktop
+                        Experience</div>
+                    <div style="font-size: 0.8rem; opacity: 0.7;">For better experience open in desktop/laptop.</div>
+                </div>
+            </div>
+            <div style="display:flex; gap:10px; margin-top:15px;">
+                <button class="toast-btn btn-cancel" onclick="closeToast()">Stay Here</button>
+                <a id="toast-proceed-link" href="#" target="_blank" class="toast-btn btn-go" onclick="closeToast()">View
+                    Anyway &rarr;</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. Magic Copy
+        function copyEmail() {
+            navigator.clipboard.writeText("i.israrahmed08@gmail.com");
+            const label = document.getElementById('copy-label');
+            const icon = document.getElementById('copy-icon');
+            const card = document.querySelector('.magic-copy-card');
+
+            label.textContent = "Copied! ✔";
+            icon.classList.remove('ph-copy');
+            icon.classList.add('ph-check-circle');
+            card.style.backgroundColor = "var(--brand-navy)";
+
+            setTimeout(() => {
+                label.textContent = "Click to Copy";
+                icon.classList.remove('ph-check-circle');
+                icon.classList.add('ph-copy');
+                card.style.backgroundColor = "";
+            }, 2000);
+        }
+
+        // 2. Music Player (Local File Logic)
+        let isPlaying = false;
+        function toggleMusic(cardElement) {
+            const audio = document.getElementById('bg-music');
+            const icon = document.getElementById('play-icon');
+            const label = document.getElementById('play-label');
+
+            if (!isPlaying) {
+                // Play
+                audio.play().then(() => {
+                    isPlaying = true;
+                    cardElement.classList.add('playing');
+                    icon.classList.remove('ph-play-circle');
+                    icon.classList.add('ph-pause-circle');
+                    label.textContent = "© Sapphire"; // Generic Title
+                }).catch(e => {
+                    console.log("Audio play failed. Check if music.mp3 exists.");
+                    label.textContent = "Error: Missing File";
+                });
+            } else {
+                // Pause
+                audio.pause();
+                isPlaying = false;
+                cardElement.classList.remove('playing');
+                icon.classList.remove('ph-pause-circle');
+                icon.classList.add('ph-play-circle');
+                label.textContent = "Play/Pause";
+            }
+        }
+
+        // 3. Desktop Gatekeeper (Mobile & Tablet)
+        const toast = document.getElementById('desktop-toast');
+        const proceedLink = document.getElementById('toast-proceed-link');
+
+        document.querySelectorAll('.desktop-only-link').forEach(link => {
+            link.addEventListener('click', function (e) {
+                // Trigger on Mobile OR Tablet (<= 1024px)
+                if (window.innerWidth <= 1024) {
+                    e.preventDefault();
+                    proceedLink.setAttribute('href', this.getAttribute('href'));
+                    toast.classList.add('active');
+                }
+            });
+        });
+
+        function closeToast() {
+            toast.classList.remove('active');
+        }
+
+        // 4. Logo Preloader Animation
+        document.addEventListener("DOMContentLoaded", (event) => {
+
+            // GSAP Timeline for Logo Animation
+            const tlLoader = gsap.timeline();
+
+            // 1. Animate SVG Parts IN
+            tlLoader.to(".logo-part", {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                stagger: 0.1,
+                ease: "power3.out",
+                delay: 0.2
+            })
+                // 2. Fade Out Loader
+                .to("#preloader", {
+                    opacity: 0,
+                    duration: 0.8,
+                    delay: 0.8,
+                    onComplete: () => {
+                        document.getElementById('preloader').style.display = 'none';
+                        initSiteAnimations();
+                    }
+                });
+
+            gsap.set(".logo-part", { y: 20, opacity: 0 });
+
+            // Clock Logic
+            function updateClock() {
+                const now = new Date();
+                const timeString = now.toLocaleTimeString('en-US', {
+                    timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+                });
+                document.getElementById('live-clock').textContent = timeString;
+            }
+            setInterval(updateClock, 1000); updateClock();
+
+            // Scroll Progress
+            const nav = document.querySelector('nav');
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.scrollY;
+                const docHeight = document.body.scrollHeight - window.innerHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                document.querySelector('.scroll-progress').style.width = scrollPercent + '%';
+            });
+
+            // Active Links
+            if (window.innerWidth > 1024) {
+                const sections = document.querySelectorAll('section');
+                const navLinks = document.querySelectorAll('.nav-link');
+                window.addEventListener('scroll', () => {
+                    let current = '';
+                    sections.forEach(section => {
+                        const sectionTop = section.offsetTop;
+                        if (scrollY >= sectionTop - 250) {
+                            current = section.getAttribute('id');
+                        }
+                    });
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href').includes(current)) {
+                            link.classList.add('active');
+                        }
+                    });
+                });
+            }
+
+            console.log("%c👋 Hey! Looks like you enjoy looking under the hood.", "color: #e63946; font-size: 1.2rem; font-weight: bold;");
+        });
+
+        // 5. Site Entrance Animations
+        function initSiteAnimations() {
+            gsap.registerPlugin(ScrollTrigger);
+            const tl = gsap.timeline();
+
+            tl.to(".hero-headline", { y: 0, opacity: 1, duration: 1.2, ease: "power4.out" })
+                .to(".hero-sub", { y: 0, opacity: 1, duration: 1, ease: "power3.out" }, "-=0.8")
+                .to(".marquee-container", { opacity: 1, duration: 1.5 }, "-=0.5");
+
+            const revealElements = document.querySelectorAll(".bento-box, .anim-reveal");
+            revealElements.forEach(element => {
+                gsap.to(element, {
+                    scrollTrigger: { trigger: element, start: "top 85%" },
+                    y: 0, opacity: 1, duration: 1, ease: "power3.out"
+                });
+            });
+
+            const projects = document.querySelectorAll(".project-card");
+            projects.forEach(card => {
+                gsap.to(card, {
+                    scrollTrigger: { trigger: card, start: "top 85%" },
+                    y: 0, opacity: 1, duration: 1, ease: "power3.out"
+                });
+            });
+
+            gsap.utils.toArray(".project-card").forEach(card => {
+                const image = card.querySelector(".img-parallax-container");
+                if (image) {
+                    gsap.to(image, {
+                        yPercent: 15, ease: "none",
+                        scrollTrigger: { trigger: card, start: "top bottom", end: "bottom top", scrub: true }
+                    });
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
